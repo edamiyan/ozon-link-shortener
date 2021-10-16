@@ -13,7 +13,7 @@ func NewHandler(link LinkService) *Handler {
 }
 
 func (h *Handler) Init(router *echo.Echo) {
-	api := router.Group("/api/v1/")
+	api := router.Group("/api/v1")
 	{
 		h.initLink(api)
 	}

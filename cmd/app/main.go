@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	handler "github.com/edamiyan/ozon-link-shortener/internal/handler/v1"
-	inMemory "github.com/edamiyan/ozon-link-shortener/internal/repository/in-memory"
+	"github.com/edamiyan/ozon-link-shortener/internal/repository/in-memory"
 	"github.com/edamiyan/ozon-link-shortener/internal/repository/postgres"
 	"github.com/edamiyan/ozon-link-shortener/internal/service/link"
 	"github.com/labstack/echo/v4"
