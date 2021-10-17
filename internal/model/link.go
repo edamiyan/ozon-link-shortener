@@ -6,18 +6,18 @@ import (
 )
 
 type Link struct {
-	ID       int    `json:"id" db:"id"`
-	BaseURL  string `json:"base_url,omitempty" db:"base_url"`
-	ShortURL string `json:"short_url,omitempty" db:"short_url"`
+	ID      int    `json:"id" db:"id"`
+	BaseURL string `json:"base_url,omitempty" db:"base_url"`
+	Token   string `json:"short_url,omitempty" db:"short_url"`
 }
 
-func ValidateURL(p *Link) error {
+func ValidateBaseURL(p *Link) error {
 
 	if p == nil {
 		return fmt.Errorf("pass nil pointer")
 	}
 
-	if p.BaseURL == "" && p.ShortURL == "" {
+	if p.BaseURL == "" {
 		return fmt.Errorf("empty query")
 	}
 
@@ -25,12 +25,6 @@ func ValidateURL(p *Link) error {
 	if p.BaseURL != "" {
 		if valid, _ := regexp.Match(pattern, []byte(p.BaseURL)); !valid {
 			return fmt.Errorf("%v is a invalid base url", p.BaseURL)
-		}
-	}
-
-	if p.ShortURL != "" {
-		if valid, _ := regexp.Match(pattern, []byte(p.ShortURL)); !valid {
-			return fmt.Errorf("%v is a invalid short url", p.ShortURL)
 		}
 	}
 
