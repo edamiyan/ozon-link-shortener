@@ -1,12 +1,20 @@
 package response
 
-type ExtraError struct {
-	AdditionalProperties string `json:"additionalProperties"`
+type Error struct {
+	Message string `json:"message"`
 }
 
 type ValidationError struct {
 	Message string      `json:"message"`
 	Errors  *ExtraError `json:"errors"`
+}
+
+type ExtraError struct {
+	AdditionalProperties string `json:"additionalProperties"`
+}
+
+func NewError(message string) *Error {
+	return &Error{Message: message}
 }
 
 func NewValidationError(additionalProperties string) *ValidationError {
