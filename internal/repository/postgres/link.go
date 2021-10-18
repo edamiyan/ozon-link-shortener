@@ -48,7 +48,24 @@ func (r Repository) CreateShortURL(ctx context.Context, link *model.Link) (strin
 }
 
 func (r Repository) GetBaseURL(ctx context.Context, link *model.Link) (string, error) {
-	panic("implement me")
+	query, args, err := sq.Select("baseurl").
+		From(linksTable).
+		Where(sq.Eq{
+			"token": link.Token,
+		}).
+		PlaceholderFormat(sq.Dollar).
+		ToSql()
+
+	if err != nil {
+		return "", err
+	}
+
+	var baseURL string
+	if err := r.db.GetContext(ctx, &baseURL, query, args...); err != nil {
+		return "", err
+	}
+
+	return baseURL, nil
 }
 
 func linkData(p *model.Link) map[string]interface{} {
