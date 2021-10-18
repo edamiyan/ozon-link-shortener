@@ -7,5 +7,5 @@ import (
 
 type Repository interface {
 	CreateShortURL(ctx context.Context, link *model.Link) (string, error)
-	GetBaseURL(ctx context.Context, token string) (string, error)
+	GetBaseURL(ctx context.Context, link *model.Link) (string, error)
 }

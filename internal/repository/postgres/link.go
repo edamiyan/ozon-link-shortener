@@ -9,6 +9,6 @@ func (r Repository) CreateShortURL(ctx context.Context, link *model.Link) (strin
 	panic("implement me")
 }
 
-func (r Repository) GetBaseURL(ctx context.Context, token string) (string, error) {
+func (r Repository) GetBaseURL(ctx context.Context, link *model.Link) (string, error) {
 	panic("implement me")
 }

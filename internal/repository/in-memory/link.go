@@ -21,6 +21,10 @@ func (r Repository) CreateShortURL(ctx context.Context, link *model.Link) (strin
 	return link.Token, nil
 }
 
-func (r Repository) GetBaseURL(ctx context.Context, token string) (string, error) {
-	panic("implement me")
+func (r Repository) GetBaseURL(ctx context.Context, link *model.Link) (string, error) {
+	if baseURL, ok := r.briefToFull[link.Token]; ok {
+		return baseURL, nil
+	}
+
+	return "", fmt.Errorf("URL with this token not exist")
 }

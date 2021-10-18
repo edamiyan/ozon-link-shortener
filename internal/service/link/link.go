@@ -16,13 +16,9 @@ func NewService(repos Repository) *Service {
 
 func (s Service) CreateShortURL(ctx context.Context, link *model.Link) (string, error) {
 	link.Token = service.GenerateToken()
-	token, err := s.repos.CreateShortURL(ctx, link)
-	if err != nil {
-		return "", err
-	}
-	return token, nil
+	return s.repos.CreateShortURL(ctx, link)
 }
 
-func (s Service) GetBaseURL(ctx context.Context, token string) (string, error) {
-	panic("implement me")
+func (s Service) GetBaseURL(ctx context.Context, link *model.Link) (string, error) {
+	return s.repos.GetBaseURL(ctx, link)
 }

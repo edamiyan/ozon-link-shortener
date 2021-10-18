@@ -12,7 +12,6 @@ type Link struct {
 }
 
 func ValidateBaseURL(p *Link) error {
-
 	if p == nil {
 		return fmt.Errorf("pass nil pointer")
 	}
@@ -22,10 +21,25 @@ func ValidateBaseURL(p *Link) error {
 	}
 
 	pattern := `^(https?://|www.)?[a-zA-Z0-9-]{1,256}([.][a-zA-Z-]{1,256})?([.][a-zA-Z]{1,30})([/]?[a-zA-Z0-9/?=%&#_.-]+)`
-	if p.BaseURL != "" {
-		if valid, _ := regexp.Match(pattern, []byte(p.BaseURL)); !valid {
-			return fmt.Errorf("%v is a invalid base url", p.BaseURL)
-		}
+	if valid, _ := regexp.Match(pattern, []byte(p.BaseURL)); !valid {
+		return fmt.Errorf("%v is a invalid base url", p.BaseURL)
+	}
+
+	return nil
+}
+
+func ValidateToken(p *Link) error {
+	if p == nil {
+		return fmt.Errorf("pass nil pointer")
+	}
+
+	if p.Token == "" {
+		return fmt.Errorf("empty query")
+	}
+
+	pattern := `^[a-zA-Z0-9_]{10}`
+	if valid, _ := regexp.Match(pattern, []byte(p.Token)); !valid {
+		return fmt.Errorf("%v is a invalid token", p.Token)
 	}
 
 	return nil
