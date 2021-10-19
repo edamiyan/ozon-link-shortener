@@ -32,10 +32,6 @@ func ValidateToken(p *Link) error {
 		return fmt.Errorf("pass nil pointer")
 	}
 
-	if p.Token == "" {
-		return fmt.Errorf("empty query")
-	}
-
 	pattern := `^[a-zA-Z0-9_]{10}$`
 	if valid, _ := regexp.Match(pattern, []byte(p.Token)); !valid {
 		return fmt.Errorf("%v is a invalid token", p.Token)
