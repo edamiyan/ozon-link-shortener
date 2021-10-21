@@ -1,7 +1,13 @@
 version: '3'
 
 services:
-  app:
+  app_im:
+    build: ./
+    command: ./app
+    ports:
+      - "8080:8080"
+
+  app_db:
     build: ./
     command: ./wait-for-postgres.sh db ./app -db
     ports:
