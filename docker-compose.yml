@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  app_im:
+    build: ./
+    command: ./app
+    ports:
+      - "8080:8080"
+
+  app_db:
+    build: ./
+    command: ./wait-for-postgres.sh db ./app -db
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgres://postgres:postgres@db:5432/postgres?sslmode=disable"
+      DB_PASSWORD: "postgres"
+
+  db:
+    restart: always
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./postgres/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+
+volumes:
+  db-data:
