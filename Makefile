@@ -14,7 +14,7 @@ run_db:
 
 fmt:
 	go fmt ./...
-	goimports -l ./
+	#go imports -l ./
 	go mod tidy
 
 generate:

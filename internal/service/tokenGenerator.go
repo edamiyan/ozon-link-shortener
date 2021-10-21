@@ -11,7 +11,7 @@ const alphabet = "_0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy
 
 func GenerateToken() string {
 	token := bytes.Buffer{}
-	uniqueTime := time.Now().UnixMicro()
+	uniqueTime := time.Now().Unix()
 	_, _ = fmt.Fprintf(&token, "%s", convert(uniqueTime, int64(len(alphabet))))
 
 	for len(token.String()) < 10 {

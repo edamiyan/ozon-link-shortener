@@ -20,10 +20,10 @@ func TestGetBaseURL(t *testing.T) {
 	}{
 		"ok": {
 			inputToken: &model.Link{Token: "abc_012_yz"},
-			want:       "https://yandex.ru",
+			want:       "https://ozon.ru",
 			mock: func(repos *MockRepository, inputToken *model.Link) {
 				repos.EXPECT().GetBaseURL(gomock.Any(), inputToken).
-					Return("https://yandex.ru", nil)
+					Return("https://ozon.ru", nil)
 			},
 		},
 		"error": {
@@ -70,7 +70,7 @@ func TestCreateShortURL(t *testing.T) {
 		err     error
 	}{
 		"ok": {
-			baseURL: &model.Link{BaseURL: "https://yandex.ru"},
+			baseURL: &model.Link{BaseURL: "https://ozon.ru"},
 			want:    "TOKEN_1234",
 			mock: func(repos *MockRepository, baseURL *model.Link) {
 				repos.EXPECT().CreateShortURL(gomock.Any(), baseURL).
@@ -78,7 +78,7 @@ func TestCreateShortURL(t *testing.T) {
 			},
 		},
 		"error": {
-			baseURL: &model.Link{BaseURL: "https://yandex.ru"},
+			baseURL: &model.Link{BaseURL: "https://ozon.ru"},
 			mock: func(repos *MockRepository, baseURL *model.Link) {
 				repos.EXPECT().CreateShortURL(gomock.Any(), baseURL).
 					Return("", fmt.Errorf("some error"))

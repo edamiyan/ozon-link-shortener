@@ -20,19 +20,19 @@ func TestHandler_createShortURL(t *testing.T) {
 		expectedStatusCode int
 	}{
 		"ok": {
-			input: `{"base_url":"https://yandex.ru"}`,
+			input: `{"base_url":"https://ozon.ru"}`,
 			mock: func(repos *MockLinkService) {
 				repos.EXPECT().CreateShortURL(gomock.Any(), gomock.Any()).Return("token", nil)
 			},
 			expectedStatusCode: http.StatusOK,
 		},
 		"error_validation": {
-			input:              `{"base_url":"https://yandex"}`,
+			input:              `{"base_url":"https://ozon"}`,
 			mock:               func(repos *MockLinkService) {},
 			expectedStatusCode: http.StatusBadRequest,
 		},
 		"error_internal": {
-			input: `{"base_url":"https://yandex.ru"}`,
+			input: `{"base_url":"https://ozon.ru"}`,
 			mock: func(repos *MockLinkService) {
 				repos.EXPECT().CreateShortURL(gomock.Any(), gomock.Any()).Return("", fmt.Errorf("some error"))
 			},
@@ -77,7 +77,7 @@ func TestHandler_getBaseURL(t *testing.T) {
 			inputToken: "abc_012_yz",
 			mock: func(repos *MockLinkService) {
 				repos.EXPECT().GetBaseURL(gomock.Any(), &model.Link{Token: "abc_012_yz"}).
-					Return("https://yandex.ru", nil)
+					Return("https://ozon.ru", nil)
 			},
 			expectedStatusCode: http.StatusOK,
 		},
