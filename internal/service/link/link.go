@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"github.com/edamiyan/ozon-link-shortener/internal/model"
-	"github.com/edamiyan/ozon-link-shortener/internal/service"
+	"github.com/edamiyan/ozon-link-shortener/internal/pkg/token_generator"
 )
 
 type Service struct {
@@ -16,7 +16,7 @@ func NewService(repos Repository) *Service {
 }
 
 func (s Service) CreateShortURL(ctx context.Context, link *model.Link) (string, error) {
-	link.Token = service.GenerateToken()
+	link.Token = token_generator.GenerateToken()
 	token, err := s.repos.CreateShortURL(ctx, link)
 	if err != nil {
 		return "", err

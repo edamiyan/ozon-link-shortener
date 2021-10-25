@@ -1,4 +1,4 @@
-package inMemory
+package in_memory
 
 type Repository struct {
 	briefToFull map[string]string

@@ -1,4 +1,4 @@
-package service
+package token_generator
 
 import (
 	"bytes"

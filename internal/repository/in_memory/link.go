@@ -1,4 +1,4 @@
-package inMemory
+package in_memory
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"github.com/edamiyan/ozon-link-shortener/internal/model"
 )
 
-func (r Repository) CreateShortURL(ctx context.Context, link *model.Link) (string, error) {
+func (r Repository) CreateShortURL(_ context.Context, link *model.Link) (string, error) {
 	if _, ok := r.briefToFull[link.Token]; ok {
 		return "", fmt.Errorf("token already exist")
 	}
@@ -21,7 +21,7 @@ func (r Repository) CreateShortURL(ctx context.Context, link *model.Link) (strin
 	return link.Token, nil
 }
 
-func (r Repository) GetBaseURL(ctx context.Context, link *model.Link) (string, error) {
+func (r Repository) GetBaseURL(_ context.Context, link *model.Link) (string, error) {
 	if baseURL, ok := r.briefToFull[link.Token]; ok {
 		return baseURL, nil
 	}
